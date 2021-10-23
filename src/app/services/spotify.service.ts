@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { environment } from "../../environments/environment";
+import { map} from "rxjs/operators";
 
 const CLIENT_ID = environment.spotify.clientId;
 
@@ -18,6 +19,7 @@ export class SpotifyService {
   private requestUri = environment.spotify.requestUri;
 
   private accessToken: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private downloadUrl: string = environment.spotify.downloadURL;
 
   setToken(token: string) {
     this.accessToken.next(token);
@@ -36,10 +38,19 @@ export class SpotifyService {
     window.location.href = accessCodeUrl.toString();
   }
 
-  searchOnSpotify(term: string, type: string = 'track') {
-    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken.getValue()}`)
+  searchOnSpotify(term: string, type: string = 'track'): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken.getValue()}`);
     const params: HttpParams = new HttpParams().set('q', term).set('type', type).set('limit', 20);
 
-    return this.http.get(this.BASE_URL, {params, headers})
+    return this.http.get(this.BASE_URL, {params, headers}).pipe(
+      map((results:any) => {return results.tracks.items})
+    );
+
   }
+
+  downloadFromSpotify() {
+    this.http.get(this.downloadUrl);
+  }
+
+
 }

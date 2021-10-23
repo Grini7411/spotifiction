@@ -1,27 +1,28 @@
-<div>
-  <button mat-button (click)="getToken()" >get token</button>
-  <span>{{accessCode}}</span>
-</div>
-<div>
-  <form [formGroup]="searchForm">
-    <mat-form-field class="example-full-width" appearance="fill" *ngIf="showSearchBar">
-      <mat-label>Search Spotify</mat-label>
-      <input type="text" matInput placeholder="search Spotify..." formControlName="searchTerm">
-    </mat-form-field>
 
-    <div>
+<div class="searchBox">
+  <form>
+    <mat-form-field appearance="fill" *ngIf="showSearchBar" class="w-100">
+      <mat-label>Search Spotify</mat-label>
+      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm" [matAutocomplete]="searchAuto">
+    </mat-form-field>
+    <mat-autocomplete autoActiveFirstOption #searchAuto="matAutocomplete">
+      <mat-option *ngFor="let track of tracks">
+        {{track.name}}
+      </mat-option>
+    </mat-autocomplete>
+
+
+    <div class="text-center">
       <button mat-raised-button color="primary" (click)="searchSpotify($event)" *ngIf="showSearchBar">Search</button>
+      <button mat-raised-button color="primary" (click)="downloadTrack($event)" *ngIf="showSearchBar"></button>
     </div>
   </form>
 </div>
 
+<div class="track-container">
+  <div class="track" *ngFor="let track of tracks">
+    <app-track [track]="track"></app-track>
+  </div>
 
-
-<!--<div class="custom-shape-divider-bottom-1634391202">-->
-<!--  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">-->
-<!--    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>-->
-<!--  </svg>-->
-
-
-<!--</div>-->
+</div>
 

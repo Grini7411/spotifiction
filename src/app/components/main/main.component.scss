@@ -18,3 +18,23 @@
 .custom-shape-divider-bottom-1634391202 .shape-fill {
   fill: #FFFFFF;
 }
+
+.searchBox {
+  background: #FFFFFF ;
+  border-radius: 20px;
+  box-shadow: 5px 10px #888888;
+  width: 500px;
+}
+
+app-track {
+
+}
+
+.track-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  flex-wrap: wrap;
+}

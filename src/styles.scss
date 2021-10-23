@@ -2,4 +2,37 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+}
+.container .container-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url('https://cdn.pixabay.com/photo/2016/04/28/23/53/spotify-1360002_1280.jpg') no-repeat fixed;
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+
+}
+.container app-root {
+  position: relative;
+  z-index: 1;
+}
+
+.w-100 {
+  width: 100%
+}
+.text-center {
+  text-align: center;
+}
