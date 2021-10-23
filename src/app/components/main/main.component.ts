@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { SpotifyService} from "../../services/spotify.service";
 import { RouteConfigLoadEnd, Router} from "@angular/router";
-import { FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
 import {Track} from "../../models/types";
 
@@ -48,5 +48,9 @@ export class MainComponent implements OnInit {
     this.spotifyServ.searchOnSpotify(this.searchTerm.value).subscribe(result => {
       this.tracks = result;
     });
+  }
+
+  downloadTrack($event: MouseEvent) {
+    this.spotifyServ.downloadFromSpotify("");
   }
 }
