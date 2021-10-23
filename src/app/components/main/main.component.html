@@ -1,16 +1,20 @@
-<div>
-  <button mat-button (click)="getToken()" >get token</button>
-  <span>{{accessCode}}</span>
-</div>
-<div>
-  <form [formGroup]="searchForm">
-    <mat-form-field class="example-full-width" appearance="fill" *ngIf="showSearchBar">
-      <mat-label>Search Spotify</mat-label>
-      <input type="text" matInput placeholder="search Spotify..." formControlName="searchTerm">
-    </mat-form-field>
 
-    <div>
+<div class="searchBox">
+  <form>
+    <mat-form-field appearance="fill" *ngIf="showSearchBar" class="w-100">
+      <mat-label>Search Spotify</mat-label>
+      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm" [matAutocomplete]="searchAuto">
+    </mat-form-field>
+    <mat-autocomplete autoActiveFirstOption #searchAuto="matAutocomplete">
+      <mat-option *ngFor="let track of tracks">
+        {{track.name}}
+      </mat-option>
+    </mat-autocomplete>
+
+
+    <div class="text-center">
       <button mat-raised-button color="primary" (click)="searchSpotify($event)" *ngIf="showSearchBar">Search</button>
+      <button mat-raised-button color="primary" (click)="downloadTrack($event)" *ngIf="showSearchBar"></button>
     </div>
   </form>
 </div>
