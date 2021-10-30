@@ -4,6 +4,8 @@ import { RouteConfigLoadEnd, Router} from "@angular/router";
 import { FormControl} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
 import {Track} from "../../models/types";
+import {Observable, of} from "rxjs";
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-main',
@@ -14,7 +16,8 @@ export class MainComponent implements OnInit {
 
   public showSearchBar: boolean = false;
 
-  tracks: Track[] = [];
+  tracks$?: Observable<Track[]>;
+  searchResults$?: Observable<Track[]>;
 
   searchTerm: FormControl = new FormControl();
 
@@ -33,24 +36,27 @@ export class MainComponent implements OnInit {
       }
     })
 
-    this.searchTerm.valueChanges.pipe(
+    this.searchResults$ = this.searchTerm.valueChanges.pipe(
       debounceTime(700),
       distinctUntilChanged(),
       switchMap((term: string) => this.spotifyServ.searchOnSpotify(term))
-    ).subscribe((result) => {
-      this.tracks = result;
-    })
+    )
   }
 
 
 
-  searchSpotify(event: Event) {
-    this.spotifyServ.searchOnSpotify(this.searchTerm.value).subscribe(result => {
-      this.tracks = result;
-    });
+  searchSpotify() {
+    this.tracks$ = this.spotifyServ.searchOnSpotify(this.searchTerm.value);
   }
 
   downloadTrack($event: MouseEvent) {
     this.spotifyServ.downloadFromSpotify("");
+  }
+
+
+  onTrackSelect(event: MatAutocompleteSelectedEvent) {
+    this.tracks$ = of([event.option.value]) as Observable<Track[]>;
+    const trackName = event.option.value.name;
+    this.searchTerm.setValue(trackName);
   }
 }
