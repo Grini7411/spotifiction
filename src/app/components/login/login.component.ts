@@ -17,4 +17,7 @@ export class LoginComponent implements OnInit {
     this.spotifyServ.getAccessToken();
   }
 
+  gotoSpotifyRegistration() {
+    window.open('https://www.spotify.com', 'register spotify');
+  }
 }
