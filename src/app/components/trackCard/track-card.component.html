@@ -4,11 +4,13 @@
   <mat-card-subtitle *ngIf="track">
     <span *ngFor="let artist of track.artists">{{artist.name}},</span>
   </mat-card-subtitle>
-  <mat-card-footer>
-    <button mat-raised-button color="primary">Download</button>
-    <button mat-raised-button color="accent">Info</button>
-    <button mat-mini-fab color="primary">
-      <mat-icon>play_arrow</mat-icon>
-    </button>
+  <mat-card-footer >
+    <div class="track-card-footer">
+      <button mat-raised-button color="primary">Download</button>
+      <button mat-raised-button color="accent" (click)="onInfoClick()">Info</button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </div>
   </mat-card-footer>
 </mat-card>

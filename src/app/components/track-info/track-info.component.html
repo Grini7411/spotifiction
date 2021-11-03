@@ -1,0 +1,15 @@
+<mat-card style="overflow-y: scroll">
+  <img mat-card-image [src]="track!.album!.images[0]!.url" alt="album image"/>
+  <mat-card-title>{{track?.name || ''}}</mat-card-title>
+  <mat-card-subtitle *ngIf="track">
+    <span *ngFor="let artist of track.artists">{{artist.name}},</span>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <p>Duration: {{track.duration_ms | date:'mm:ss'}}</p>
+    <p>Album: {{track.album.name}}</p>
+  </mat-card-content>
+  <mat-card-footer >
+    <div class="track-card-footer">
+    </div>
+  </mat-card-footer>
+</mat-card>
