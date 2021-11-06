@@ -9,7 +9,7 @@ export class TrackQuery extends Query<TrackState> {
 
   getLastTrackPicks$: Observable<Track[]> = this.select(state => state.trackCache);
 
-
+  getChosenTrack$: Observable<Track | null> = this.select(state => state.chosenTrack)
 
   constructor(protected store: TrackStore) {
     super(store);

@@ -1,8 +1,7 @@
 
-  export interface ExternalUrls {
+export interface ExternalUrls {
     spotify: string;
   }
-
   export interface Artist {
     external_urls: ExternalUrls;
     href: string;
@@ -11,13 +10,11 @@
     type: string;
     uri: string;
   }
-
   export interface Image {
     height: number;
     url: string;
     width: number;
   }
-
   export interface Album {
     album_type: string;
     artists: Artist[];
@@ -53,6 +50,13 @@ export interface Track {
   //track_number: number;
   type: string;
   uri: string;
+  duration_ms: number;
+}
+
+export interface SpotifyPlayReqApi {
+  context_uri?: string;
+  uris?: string[];
+  offset?: { position: number };
 }
 
 

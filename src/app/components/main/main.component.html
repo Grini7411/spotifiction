@@ -1,3 +1,9 @@
+<h1>Hello {{(user$ | async)?.display_name}}!!</h1>
+
+<section class="player">
+  <app-player></app-player>
+</section>
+
 
 <div class="searchBox">
   <form>
@@ -13,8 +19,7 @@
 
 
     <div class="text-center">
-      <button mat-raised-button color="primary" (click)="searchSpotify($event)" *ngIf="showSearchBar">Search</button>
-      <button mat-raised-button color="primary" (click)="downloadTrack($event)" *ngIf="showSearchBar"></button>
+      <button mat-raised-button color="primary" (click)="searchSpotify()" *ngIf="showSearchBar">Search</button>
     </div>
   </form>
 </div>
