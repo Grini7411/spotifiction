@@ -2,13 +2,15 @@
   <img mat-card-image alt=""  [src]="track!.album!.images[0]!.url"/>
   <mat-card-title>{{track?.name || ''}}</mat-card-title>
   <mat-card-subtitle *ngIf="track">
-    <span *ngFor="let artist of track.artists">{{artist.name}},</span>
+    <span *ngFor="let artist of track.artists; last as isLast">{{artist.name}}
+      <span *ngIf="!isLast">,</span>
+    </span>
   </mat-card-subtitle>
   <mat-card-footer >
     <div class="track-card-footer">
-      <button mat-raised-button color="primary">Download</button>
+      <button mat-raised-button color="primary" disabled="true">Download</button>
       <button mat-raised-button color="accent" (click)="onInfoClick()">Info</button>
-      <button mat-mini-fab color="primary">
+      <button mat-mini-fab color="primary" (click)="goToPlayTrack()">
         <mat-icon>play_arrow</mat-icon>
       </button>
     </div>

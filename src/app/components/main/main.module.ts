@@ -17,11 +17,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from '@angular/material/dialog';
 
 import {TrackInfoComponent} from "../track-info/track-info.component";
+import {PlayerSpotifictionComponent} from "../player/player-spotifiction.component";
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
 @NgModule({
-  declarations: [MainComponent, TrackCardComponent, TrackInfoComponent],
+  declarations: [MainComponent, TrackCardComponent, TrackInfoComponent, PlayerSpotifictionComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -37,7 +39,8 @@ import {TrackInfoComponent} from "../track-info/track-info.component";
     MatFormFieldModule,
     NgxAudioPlayerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule
   ]
 })
 export class MainModule { }

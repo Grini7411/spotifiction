@@ -13,7 +13,6 @@ export class TrackInfoComponent implements OnInit {
 
   track: Track = this.data.track;
   ngOnInit(): void {
-    debugger;
   }
 
 }

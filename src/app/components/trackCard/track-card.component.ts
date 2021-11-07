@@ -38,4 +38,8 @@ export class TrackCardComponent implements OnInit {
 
 
     }
+
+  goToPlayTrack(): void {
+    window.open(this.track?.external_urls.spotify);
+  }
 }

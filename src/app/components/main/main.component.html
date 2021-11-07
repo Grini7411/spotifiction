@@ -9,10 +9,13 @@
   <form>
     <mat-form-field appearance="fill" *ngIf="showSearchBar" class="w-100">
       <mat-label>Search Spotify</mat-label>
-      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm" [matAutocomplete]="searchAuto">
+      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm"
+             [matAutocomplete]="searchAuto"
+             #trigger="matAutocompleteTrigger"
+             (click)="getRecentTracks($event)">
     </mat-form-field>
     <mat-autocomplete autoActiveFirstOption #searchAuto="matAutocomplete" (optionSelected)="onTrackSelect($event)">
-      <mat-option *ngFor="let track of searchResults$ | async" [value]="track" >
+      <mat-option *ngFor="let track of searchResults$ | async" [value]="track">
         {{track.name}} - <span *ngFor="let artist of track.artists; last as isLast">{{artist.name}} <span *ngIf="!isLast">,</span> </span>
       </mat-option>
     </mat-autocomplete>
@@ -28,6 +31,6 @@
   <div class="track" *ngFor="let track of tracks$ | async">
     <app-track-card *ngIf="!!track" [track]="track"></app-track-card>
   </div>
-
 </div>
+
 
