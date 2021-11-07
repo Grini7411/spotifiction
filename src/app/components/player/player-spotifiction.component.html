@@ -1,0 +1,24 @@
+
+<div class="player" cdkDrag *ngIf="track">
+  <div class="head">
+    <div class="back" [ngStyle]="{'background-image': 'url(' + bgImage + ')'}"></div>
+    <div class="front">
+      <div class="avatar"><img [src]="track?.album?.images[0]?.url" alt="background image track"/></div>
+      <div class="infos">
+        <div class="titulo_song">{{track.name}}</div>
+        <div class="duracao_song"><i class="fa fa-clock-o">
+          Total time {{track?.duration_ms | date:'mm:ss'}}</i></div>
+        <div class="tags"></div>
+      </div>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="soundline"></div>
+    <div class="controllers active">
+      <button mat-mini-fab ><mat-icon>fast_rewind</mat-icon></button>
+      <button mat-mini-fab (click)="playTrack()"><mat-icon>play_arrow</mat-icon></button>
+      <button mat-mini-fab ><mat-icon>fast_forward</mat-icon></button>
+    </div>
+  </div>
+</div>
+<div class="rotation"></div>

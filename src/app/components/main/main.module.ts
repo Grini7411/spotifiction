@@ -12,11 +12,18 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MainComponent} from "./main.component";
 import {TrackCardComponent} from "../trackCard/track-card.component";
+import {NgxAudioPlayerModule} from "ngx-audio-player";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDialogModule} from '@angular/material/dialog';
+
+import {TrackInfoComponent} from "../track-info/track-info.component";
+import {PlayerSpotifictionComponent} from "../player/player-spotifiction.component";
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
 @NgModule({
-  declarations: [MainComponent, TrackCardComponent],
+  declarations: [MainComponent, TrackCardComponent, TrackInfoComponent, PlayerSpotifictionComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -29,7 +36,11 @@ import {TrackCardComponent} from "../trackCard/track-card.component";
     MatAutocompleteModule,
     MatSelectModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgxAudioPlayerModule,
+    MatIconModule,
+    MatDialogModule,
+    DragDropModule
   ]
 })
 export class MainModule { }

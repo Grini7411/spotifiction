@@ -1,28 +1,36 @@
+<h1>Hello {{(user$ | async)?.display_name}}!!</h1>
+
+<section class="player">
+  <app-player></app-player>
+</section>
+
 
 <div class="searchBox">
   <form>
     <mat-form-field appearance="fill" *ngIf="showSearchBar" class="w-100">
       <mat-label>Search Spotify</mat-label>
-      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm" [matAutocomplete]="searchAuto">
+      <input type="text" matInput placeholder="search Spotify..." [formControl]="searchTerm"
+             [matAutocomplete]="searchAuto"
+             #trigger="matAutocompleteTrigger"
+             (click)="getRecentTracks($event)">
     </mat-form-field>
-    <mat-autocomplete autoActiveFirstOption #searchAuto="matAutocomplete">
-      <mat-option *ngFor="let track of tracks">
-        {{track.name}}
+    <mat-autocomplete autoActiveFirstOption #searchAuto="matAutocomplete" (optionSelected)="onTrackSelect($event)">
+      <mat-option *ngFor="let track of searchResults$ | async" [value]="track">
+        {{track.name}} - <span *ngFor="let artist of track.artists; last as isLast">{{artist.name}} <span *ngIf="!isLast">,</span> </span>
       </mat-option>
     </mat-autocomplete>
 
 
     <div class="text-center">
-      <button mat-raised-button color="primary" (click)="searchSpotify($event)" *ngIf="showSearchBar">Search</button>
-      <button mat-raised-button color="primary" (click)="downloadTrack($event)" *ngIf="showSearchBar"></button>
+      <button mat-raised-button color="primary" (click)="searchSpotify()" *ngIf="showSearchBar">Search</button>
     </div>
   </form>
 </div>
 
 <div class="track-container">
-  <div class="track" *ngFor="let track of tracks">
-    <app-track [track]="track"></app-track>
+  <div class="track" *ngFor="let track of tracks$ | async">
+    <app-track-card *ngIf="!!track" [track]="track"></app-track-card>
   </div>
-
 </div>
+
 
